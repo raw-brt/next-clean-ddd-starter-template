@@ -1,0 +1,1 @@
+// Interface for Course repository

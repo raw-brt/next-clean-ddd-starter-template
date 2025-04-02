@@ -1,0 +1,84 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## 🧠 Architecture & Philosophy
+
+1. **Respect Clean Architecture boundaries**:
+   - Domain logic should be pure and framework-agnostic.
+   - Infrastructure (Supabase, Sentry, etc.) should be implemented behind interfaces.
+   - Presentation/UI should never depend directly on domain internals.
+
+2. **Use Domain-Driven Design principles**:
+   - Model the domain using entities, value objects, and use cases.
+   - Data flows through clearly defined DTOs.
+   - Avoid logic leaks into controllers, views, or repositories.
+
+3. **Use Server Actions as controllers**:
+   - Handle request parsing and validation.
+   - Call use cases with DTOs.
+   - Catch and handle errors gracefully (e.g., with Sentry).
+
+---
+
+## 🧱 Project Design Constraints
+
+- **Use TypeScript** everywhere (strict mode enabled).
+- **Use Tailwind CSS + shadcn/ui** for all UI components.
+- **Use Zod** for runtime validation of DTOs.
+- **Use Supabase** only in infrastructure-layer repository implementations.
+- **Use trigger.dev** only to call use cases, never to contain business logic.
+
+---
+
+## ✅ When implementing features, AI must:
+
+1. **Create a folder in `domain/feature/`**:
+   - Add the entity or value object (if needed)
+   - Create the `usecases/` folder and define a use case
+   - Define input/output DTOs in `dtos/` (create both entry and exit DTOs if not present)
+   - Define a repository interface if persistence is needed
+
+2. **Add repository implementation in `infrastructure/repositories/`**
+   - It should comply with the interface defined in `domain/`
+
+3. **Add a server action in `app/feature/actions.ts`**
+   - It acts as the controller calling the use case
+   - Parse input data into the input DTO
+   - Transform output entity into the response DTO if needed
+
+4. **Create UI components in `components/modules/feature/`**
+   - Components must use shadcn/ui primitives
+   - State and hooks go into `components/states/feature/`
+
+---
+
+## 🧩 Git Flow Expectations
+
+- Use `feature/xyz` branches based on `develop`
+- Use `feat(scope): description` format for commits
+- Create PRs targeting `develop` (never `main` directly)
+- All PRs must follow Clean Architecture (DTOs, use cases, etc.
+
+---
+
+## 💡 Additional Guidelines
+
+- Avoid using direct fetches in React components — always go through server actions.
+- Never leak Supabase or trigger.dev logic into the domain.
+- All external effects (analytics, logging, async jobs) should be handled in the controller or infrastructure.
+- When in doubt, preserve purity in the domain.
+
+---
+
+## 📌 Summary
+
+- **Use Clean Architecture to structure code**
+- **Use DDD to model business logic**
+- **Use modern tools pragmatically, but always respect boundaries**
+- **Always define and use entry and exit DTOs around use cases**
+- **Keep domain clean, testable, and portable**
+
+> This rule set exists to protect the long-term health and scalability of this project.
+> Any AI-generated code should align with this structure unless explicitly instructed otherwise.

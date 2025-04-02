@@ -1,0 +1,12 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Sobre Nosotros",
+    "contact": "Contacto"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "retry": "Reintentar"
+  }
+}
