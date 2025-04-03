@@ -31,12 +31,14 @@
   "devDependencies": {
     "@types/node": "latest",
     "@types/react": "latest",
-    "autoprefixer": "latest",
+    "autoprefixer": "^10.4.21",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "postcss": "latest",
+    "postcss": "^8.4.35",
+    "postcss-import": "^16.1.0",
     "prettier": "latest",
-    "tailwindcss": "latest",
+    "tailwindcss": "^4.1.1",
+    "@tailwindcss/postcss": "^4.0.0-alpha.13",
     "typescript": "latest"
   }
 }
